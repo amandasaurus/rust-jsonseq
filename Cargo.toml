@@ -5,6 +5,7 @@ authors = ["Rory McCann <rory@technomancy.org>"]
 edition = "2018"
 description = "Read & Write json sequences"
 license = "AGPL-3.0+"
+repository = "https://github.com/rory/rust-json-seq"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
