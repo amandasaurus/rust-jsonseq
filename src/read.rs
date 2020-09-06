@@ -66,7 +66,7 @@ impl<R: Read> JsonSeqReader<R> {
     }
 
     /// Reads & returns the next JSON object.
-    pub fn next_from_json(&mut self) -> Result<Option<serde_json::Value>, Error> {
+    pub fn next_item(&mut self) -> Result<Option<serde_json::Value>, Error> {
         let res = self.next_item_raw()?;
         match res {
             None => Ok(None),
@@ -103,7 +103,7 @@ impl<R: Read> Iterator for JsonSeqReader<R> {
     type Item = Result<serde_json::Value, Error>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        self.next_from_json().transpose()
+        self.next_item().transpose()
     }
 }
 
