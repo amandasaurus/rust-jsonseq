@@ -53,7 +53,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test1() {
+    fn raw1() {
         let mut buf = Vec::new();
         let mut wtr = JsonSeqWriter::new(buf);
 
@@ -63,6 +63,36 @@ mod tests {
             wtr.get_ref(),
             &[0x1E, 'h' as u8, 'e' as u8, 'l' as u8, 'l' as u8, 'o' as u8, 0x0A]
         );
+
+    }
+
+    #[test]
+    fn json1() {
+        use serde_json::json;
+
+        let buf = Vec::new();
+        let mut wtr = JsonSeqWriter::new(buf);
+
+        wtr.write_item(&json!({"foo": "bar"})).unwrap();
+        wtr.write_item(&json!([1, 2, "c"])).unwrap();
+
+        let buf = wtr.into_inner();
+
+        let (step, buf) = buf.split_at(1);
+        assert_eq!(step, &[0x1E]);
+        let (step, buf) = buf.split_at(13);
+        assert_eq!(step, "{\"foo\":\"bar\"}".as_bytes());
+        let (step, buf) = buf.split_at(1);
+        assert_eq!(step, &[0x0A]);
+
+        let (step, buf) = buf.split_at(1);
+        assert_eq!(step, &[0x1E]);
+        let (step, buf) = buf.split_at(9);
+        assert_eq!(step, "[1,2,\"c\"]".as_bytes());
+        let (step, buf) = buf.split_at(1);
+        assert_eq!(step, &[0x0A]);
+
+        assert_eq!(buf.len(), 0);
 
     }
 }
