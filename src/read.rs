@@ -77,6 +77,10 @@ impl<R: Read> JsonSeqReader<R> {
         }
     }
 
+    pub fn read_item(&mut self) -> Result<Option<serde_json::Value>, Error> {
+        self.next_item()
+    }
+
     /// Return a reference to the inner `Read`
     pub fn get_ref(&self) -> &R {
         &self.inner.get_ref()
