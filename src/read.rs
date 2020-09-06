@@ -31,7 +31,7 @@ impl<R: Read> JsonSeqReader<R> {
     }
 
     /// Reads the next item from 
-    fn next_item(&mut self) -> std::io::Result<Option<Vec<u8>>> {
+    fn next_item_raw(&mut self) -> std::io::Result<Option<Vec<u8>>> {
         let mut buf = Vec::new();
         loop {
             buf.clear();
@@ -53,7 +53,7 @@ impl<R: Read> JsonSeqReader<R> {
     }
 
     fn next_item_str(&mut self) -> std::io::Result<Option<String>> {
-        self.next_item()
+        self.next_item_raw()
             .map(|bytes_opt| bytes_opt.map(|bytes| String::from_utf8(bytes).unwrap()))
     }
 
@@ -67,7 +67,7 @@ impl<R: Read> JsonSeqReader<R> {
 
     /// Reads & returns the next JSON object.
     pub fn next_from_json(&mut self) -> Result<Option<serde_json::Value>, Error> {
-        let res = self.next_item()?;
+        let res = self.next_item_raw()?;
         match res {
             None => Ok(None),
             Some(bytes) => {
@@ -114,7 +114,7 @@ impl<'a, R: Read> Iterator for JsonSeqReaderBytesIter<'a, R>
     type Item = std::io::Result<Vec<u8>>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        self.0.next_item().transpose()
+        self.0.next_item_raw().transpose()
     }
 }
 
