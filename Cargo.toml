@@ -1,11 +1,11 @@
 [package]
-name = "json-seq"
+name = "jsonseq"
 version = "0.1.0"
 authors = ["Rory McCann <rory@technomancy.org>"]
 edition = "2018"
-description = "Read & Write json sequences"
+description = "Read & Write json sequences RFC 7464"
 license = "AGPL-3.0+"
-repository = "https://github.com/rory/rust-json-seq"
+repository = "https://github.com/rory/rust-jsonseq"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
