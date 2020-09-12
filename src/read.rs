@@ -57,10 +57,12 @@ impl<R: Read> JsonSeqReader<R> {
             .map(|bytes_opt| bytes_opt.map(|bytes| String::from_utf8(bytes).unwrap()))
     }
 
+    #[allow(dead_code)]
     fn iter_str(&mut self) -> JsonSeqReaderStringIter<R> {
         JsonSeqReaderStringIter(self)
     }
 
+    #[allow(dead_code)]
     fn iter_bytes(&mut self) -> JsonSeqReaderBytesIter<R> {
         JsonSeqReaderBytesIter(self)
     }
