@@ -12,4 +12,4 @@ repository = "https://github.com/rory/rust-jsonseq"
 [dependencies]
 serde_json = "1.0.57"
 serde = "1.0.115"
-
+thiserror = "1.0"
