@@ -5,7 +5,6 @@ pub struct JsonSeqWriter<W: Write> {
 }
 
 impl<W: Write> JsonSeqWriter<W> {
-
     /// Construct a new JsonSeqWriter from a `Write`
     pub fn new(inner: W) -> Self {
         JsonSeqWriter { inner }
@@ -63,7 +62,6 @@ mod tests {
             wtr.get_ref(),
             &[0x1E, 'h' as u8, 'e' as u8, 'l' as u8, 'l' as u8, 'o' as u8, 0x0A]
         );
-
     }
 
     #[test]
@@ -93,6 +91,5 @@ mod tests {
         assert_eq!(step, &[0x0A]);
 
         assert_eq!(buf.len(), 0);
-
     }
 }

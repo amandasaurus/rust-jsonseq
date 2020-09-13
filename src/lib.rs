@@ -1,6 +1,6 @@
 extern crate serde;
-extern crate thiserror;
 pub extern crate serde_json;
+extern crate thiserror;
 
 use thiserror::Error;
 
@@ -25,8 +25,8 @@ pub enum Error {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::io::Cursor;
     use serde_json::json;
+    use std::io::Cursor;
 
     #[test]
     fn roundtrip1() {
@@ -44,5 +44,4 @@ mod tests {
         assert_eq!(rdr.read_item().unwrap(), None);
         assert_eq!(rdr.read_item().unwrap(), None);
     }
-
 }

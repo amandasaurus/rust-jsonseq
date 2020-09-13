@@ -30,7 +30,7 @@ impl<R: Read> JsonSeqReader<R> {
         JsonSeqReader::new(Cursor::new(s.into_bytes()))
     }
 
-    /// Reads the next item from 
+    /// Reads the next item from
     fn next_item_raw(&mut self) -> std::io::Result<Option<Vec<u8>>> {
         let mut buf = Vec::new();
         loop {
@@ -115,8 +115,7 @@ impl<R: Read> Iterator for JsonSeqReader<R> {
 
 struct JsonSeqReaderBytesIter<'a, R: Read>(&'a mut JsonSeqReader<R>);
 
-impl<'a, R: Read> Iterator for JsonSeqReaderBytesIter<'a, R>
-{
+impl<'a, R: Read> Iterator for JsonSeqReaderBytesIter<'a, R> {
     type Item = std::io::Result<Vec<u8>>;
 
     fn next(&mut self) -> Option<Self::Item> {
